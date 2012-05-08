@@ -60,9 +60,6 @@ _.extend(Store.prototype, {
     // Save the current state of the Store to the FeedHenry local this.this.data store.
     save: function () {
         fhPut(this.name, JSON.stringify(this.data));
-        
-        // Same as above; may not be needed.
-         _.delay(function () {}, 1000);
     },
 
     /* Add a model, giving it a (hopefully) unique GUID, if it doesn't already
