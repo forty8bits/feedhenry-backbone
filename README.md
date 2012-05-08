@@ -37,3 +37,9 @@ only local, but soon there'll be work underway on adapters for the FeedHenry
 cloud database storage, and a cleanup of this one here.
 
 Enjoy.
+
+---
+
+*Obligatory screenshot of early build... (ignore the ugly button at the bottom!)*
+
+![FeedHenry Backbone TodoMVC - early days](http://dl.dropbox.com/u/200616/todowip.png)
