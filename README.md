@@ -1,7 +1,7 @@
 # FeedHenry Backbone
 
 This is a (really) early release of a backbone.localStorage based adapter for
-the [FeedHenry](http://feedhenry.com/) mobile platform. The obligatory todo example app is also an
+the [FeedHenry](http://feedhenry.com/) mobile platform. The obligatory todo example app is also there; an
 adaptation of TodoMVC for backbone.js, with a distinctly [Clear](http://www.realmacsoftware.com/clear/) twist on the UI,
 just because I really like the style and want to see if something so smooth will
 be possible through an HTML/CSS based mobile app. I'm optimistic that it will.
@@ -14,6 +14,13 @@ project back up and implementing more thorough backbone.sync replacements for
 the FeedHenry local and cloud storage APIs, as well as developing a more robust
 example application (or two) to show off what Backbone can make possible on the
 platform.
+
+---
+
+## Obligatory Screenshots of the App
+
+![FeedHenry Backbone TodoMVC - early days 1](http://dl.dropbox.com/u/200616/pic1.png)
+![FeedHenry Backbone TodoMVC - early days 2](http://dl.dropbox.com/u/200616/pic2.png)
 
 ---
 
@@ -37,9 +44,3 @@ only local, but soon there'll be work underway on adapters for the FeedHenry
 cloud database storage, and a cleanup of this one here.
 
 Enjoy.
-
----
-
-*Obligatory screenshot of early build... (ignore the ugly button at the bottom!)*
-
-![FeedHenry Backbone TodoMVC - early days](http://dl.dropbox.com/u/200616/todowip.png)

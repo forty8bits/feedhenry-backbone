@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>fhTodo</title>
+    <link rel="stylesheet" href="css/todos.css"/>
+</head>
+
+<body>
+    <div id="main-container">
+    
+        <div id="todos-container">
+            <input id="new-todo" type="text" placeholder="What do you have to do?">
+            <ul id="todo-list">
+            
+            </ul>  
+        </div>  
+            
+        <button id="clear-complete">Clear completed</button>
+            
+    </div>
+
+    <script src="js/libs/json2.js"></script>
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/underscore.js"></script>
+    <script src="js/libs/backbone.js"></script>
+    <script src="js/backbone-fhstorage.js"></script>
+    <script src="js/todos.js"></script>
+
+    <!-- Templates ------------------------------------------------------------>
+
+    <script type="text/template" id="todo-tpl">
+        <p class="todo-label <%= done ? 'done' : '' %>"><%= title %></p>
+    </script>
+
+</body>
+</html>
