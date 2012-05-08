@@ -8,14 +8,23 @@
  
 /* HELPER FUNCTIONS ----------------------------------------------------------*/
 
-var data = []; // May be removed (originally uses this.data in localStorage)
-
-function fhGet(theKey, callback) {
-    $fh.data({
-        key: theKey
-    }, callback, function (msg, err) {
-        $fh.log('ERROR: ' + msg);
-    });
+function fhGet(theKey) {
+  var response;
+  /* We effectively force this function into being synchronous, by creating an
+   * inner function which only runs after being called twice. _.js ftw. */
+  var returnResponse = _.after(2, function() {
+    return response;
+  });
+  
+  $fh.data({
+    key: theKey
+  }, function(res) {
+    response = res;
+    returnResponse(); // Once...
+  }, function (msg, err) {
+    $fh.log('ERROR: ' + msg);
+  });
+  return returnResponse(); // And twice.
 }
 
 function fhPut(theKey, theVal, callback) {
@@ -41,55 +50,50 @@ function guid() {
 /* Our Store is represented by a single JS object in FeedHenry's data store.
    Create it with a meaningful name, like the name you'd give a table. */
 var Store = function (name) {
-        this.name = name;
-        fhGet(this.name, function (res) {
-            // Really need to test whether this async method will cut it.
-            data = (res.val && JSON.parse(res.val)) || {};
-        });
-        
-        // This may not be necessary, test.
-        // _.delay(function () {}, 1000);
+        this.name = name;       
+        var store = fhGet(this.name).val;
+        this.data = (store && JSON.parse(store)) || {};        
     };
 
 _.extend(Store.prototype, {
 
-    // Save the current state of the Store to the FeedHenry local data store.
+    // Save the current state of the Store to the FeedHenry local this.this.data store.
     save: function () {
-        fhPut(this.name, JSON.stringify(data));
+        fhPut(this.name, JSON.stringify(this.data));
         
         // Same as above; may not be needed.
-        // _.delay(function () {}, 1000);
+         _.delay(function () {}, 1000);
     },
 
     /* Add a model, giving it a (hopefully) unique GUID, if it doesn't already
        have an id of it's own. */
     create: function (model) {
         if (!model.id) model.set(model.idAttribute, guid());
-        data[model.id] = model;
+        this.data[model.id] = model;
         this.save();
         return model;
     },
 
     // Update a model by replacing its copy in`this.data`.
     update: function (model) {
-        data[model.id] = model;
+        this.data[model.id] = model;
         this.save();
         return model;
     },
 
-    // Retrieve a model from `this.data` by id.
+    // Retrieve a model from `this.this.this.data` by id.
     find: function (model) {
-        return data[model.id];
+        return this.data[model.id];
     },
 
     // Return the array of all models currently in storage.
     findAll: function () {
-        return _.values(data);
+        return _.values(this.data);
     },
 
     // Delete a model from `this.data`, returning it.
     destroy: function (model) {
-        delete data[model.id];
+        delete this.data[model.id];
         this.save();
         return model;
     }
@@ -97,7 +101,7 @@ _.extend(Store.prototype, {
 });
 
 /* Override Backbone.sync to use delegate to the model or collection's
-   FeedHenry data store property, which should be an instance of Store. */
+   FeedHenry this.data store property, which should be an instance of Store. */
 Backbone.sync = function (method, model, options) {
 
     var resp;
