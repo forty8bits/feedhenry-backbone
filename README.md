@@ -6,7 +6,7 @@ adaptation of TodoMVC for backbone.js, with a distinctly [Clear](http://www.real
 just because I really like the style and want to see if something so smooth will
 be possible through an HTML/CSS based mobile app. I'm optimistic that it will.
 
-At the moment it's basic, and iffy... made over the course of 2 days as I learn
+At the moment it's basic, and iffy... made over the course of 2 days as I improve my
 JavaScript (having previously used it mostly only through jQuery for simple
 client side effects or ajax), in between work and a disgraceful amount of study
 for upcoming college exams. After they're behind me, I plan on taking the
